@@ -32,7 +32,6 @@ export default class InvoiceCreate extends React.Component {
             }
         };
         //this.handleInvoiceChange = this.handleInvoiceChange.bind(this);
-        this.
     }
 
 
