@@ -1,1 +1,1 @@
-<h1>This is Invoice & Receipt Creator</h1>
+<h1>Invoice & Receipt Creator</h1>
