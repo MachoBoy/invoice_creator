@@ -1,8 +1,9 @@
-import React from 'react';
-import { AppBar } from 'material-ui';
-import SideMenu from './SideMenu';
-import injectTapEventPlugin from 'react-tap-event-plugin'
-injectTapEventPlugin();
+import React from 'react'
+import { AppBar } from 'material-ui'
+import { TextField } from 'material-ui'
+import InvoiceCreate from './InvoiceCreate'
+import SideMenu from './SideMenu'
+
 
 export default class Home extends React.Component {
     constructor(props){
@@ -18,8 +19,6 @@ export default class Home extends React.Component {
         });
     }
 
-
-
     render() {
         return(
             <div>
@@ -28,12 +27,19 @@ export default class Home extends React.Component {
                     titleStyle={{textAlign: "center"}}
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                     onLeftIconButtonTouchTap={this.toggleDrawer.bind(this)}
+
                 />
                 <SideMenu
                     open={this.state.open}
                     onToggleDrawer={this.toggleDrawer.bind(this)}
                 />
+            <div>
+                <h1>Invoice</h1>
+                <TextField
+                />
             </div>
+            </div>
+
         );
     }
 }
