@@ -7,14 +7,15 @@
     border: 1px solid blue;
     width: 30%;
     margin-left:  100px;
-    margin-top: 100px;
+    margin-top: 30px;
+    position: relative;
 }
 
 .formNumber {
     border: 1px solid red;
     width: 10%;
     float: right;
-    margin-bottom: 500px;
+    position: relative;
 }
 
 .formRecipient {
@@ -31,7 +32,7 @@
 }
 
 .services {
-    width: 89%;
+    width: 95%;
 }
 
 .services th, .services td {

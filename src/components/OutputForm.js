@@ -3,9 +3,9 @@ import styles from '../styles/style.css'
 
 export default class OutputForm extends React.Component {
     render() {
+        let date = this.props.date;
         return(
             <div className={styles.form}>
-
                     <div className={styles.formHeader}>
                         <div><h1>{this.props.companyName}</h1></div>
                         <div>{this.props.street}</div>
@@ -16,6 +16,7 @@ export default class OutputForm extends React.Component {
                     <div className={styles.formNumber}>
                         <div><h2>Invoice</h2></div>
                         <div>{this.props.invoiceNumber}</div>
+                        <div>{this.props.date}</div>
                     </div>
 
                     <div className={styles.formRecipient}>
@@ -29,8 +30,13 @@ export default class OutputForm extends React.Component {
                     </div>
 
                     <div className={styles.formServices}>
-                        <div><h3>Services</h3></div>
                         <table className={styles.services}>
+                            <tbody>
+                                <tr>
+                                    <th>Services</th>
+                                    <th></th>
+                                </tr>
+                            </tbody>
                             <tbody>
                                 <tr>
                                     <th>Description</th>
@@ -45,11 +51,7 @@ export default class OutputForm extends React.Component {
                             </tbody>
                         </table>
                     </div>
-
-
             </div>
-
-
         );
     }
 }

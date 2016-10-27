@@ -5,11 +5,12 @@ import OutputForm from './OutputForm'
 export default class Home extends React.Component {
     constructor(props){
         super(props);
+        const date = new Date();
         this.state = {
             selectedKey: -1,
             open: false,
             invoiceNumber: 'invoice n',
-            date: 'date',
+            date: date,
             companyName:'companyName',
             street: 'street',
             cityStatePostal:'cityStatePostal',
@@ -22,12 +23,19 @@ export default class Home extends React.Component {
             amount: 'amt',
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleDate = this.handleDate.bind(this);
     }
 
     handleChange(e){
         let nextState = {};
         nextState[e.target.name] = e.target.value;
         this.setState(nextState)
+    }
+
+    handleDate(event, setDate) {
+        this.setState({
+            date: setDate,
+        });
     }
 
     toggleDrawer(){
@@ -37,6 +45,7 @@ export default class Home extends React.Component {
     }
 
     render() {
+
         return(
             <div>
                 <AppBar
@@ -49,6 +58,7 @@ export default class Home extends React.Component {
                 <div>
                     <OutputForm
                         invoiceNumber={this.state.invoiceNumber}
+                        date={this.state.date.toString().substring(4, 15)}
                         companyName={this.state.companyName}
                         street={this.state.street}
                         cityStatePostal={this.state.cityStatePostal}
@@ -64,7 +74,7 @@ export default class Home extends React.Component {
 
                 <div>
                     <Drawer
-                        width={450}
+                        width={380}
                         open={this.state.open}
                         onRequestChange={(open) => this.setState({open})}
                         openSecondary={true}
@@ -75,9 +85,11 @@ export default class Home extends React.Component {
                                 name="invoiceNumber"
                                 style={styles.mediumWidth}
                                 underlineShow={false}
+
                                 value={this.state.invoiceNumber}
                                 onChange={this.handleChange}
                             /><Divider />
+
                             <DatePicker
                                 hintText="Date"
                                 name="date"
@@ -85,8 +97,10 @@ export default class Home extends React.Component {
                                 firstDayOfWeek={0}
                                 autoOk={true}
                                 textFieldStyle={{width:160, margin:10}}
-                                onChange={this.handleChange}
+                                defaultDate={this.state.date}
+                                onChange={this.handleDate}
                             /><Divider />
+
                             <TextField
                                 floatingLabelText="Company Name"
                                 name="companyName"
@@ -95,6 +109,7 @@ export default class Home extends React.Component {
                                 value={this.state.companyName}
                                 onChange={this.handleChange}
                             /><Divider />
+
                             <TextField
                                 floatingLabelText="Street Address"
                                 name="street"
@@ -103,6 +118,7 @@ export default class Home extends React.Component {
                                 value={this.state.street}
                                 onChange={this.handleChange}
                             /><Divider />
+
                             <TextField
                                 floatingLabelText="City, State, Postal Code"
                                 name="cityStatePostal"
@@ -111,6 +127,7 @@ export default class Home extends React.Component {
                                 value={this.state.cityStatePostal}
                                 onChange={this.handleChange}
                             /><Divider />
+
                             <TextField
                                 floatingLabelText="Phone"
                                 name="phone"
@@ -121,7 +138,7 @@ export default class Home extends React.Component {
                             /><br/>
 
 
-                        <Badge style={{fontSize: 30, texAlign: 'center'}}>Recipient</Badge><br/>
+                        <Badge style={{fontSize: 30, texAlign: 'center'}} badgeContent="">Recipient</Badge><br/>
                             <TextField
                                 floatingLabelText="Comapny Name"
                                 name="billCompanyName"
@@ -130,6 +147,7 @@ export default class Home extends React.Component {
                                 value={this.state.billCompanyName}
                                 onChange={this.handleChange}
                             /><Divider />
+
                             <TextField
                                 floatingLabelText="Stree Address"
                                 name="billStreet"
@@ -138,6 +156,7 @@ export default class Home extends React.Component {
                                 value={this.state.billStreet}
                                 onChange={this.handleChange}
                             /><Divider />
+
                             <TextField
                                 floatingLabelText="City, State, Zip"
                                 name="billCityStatePostal"
@@ -146,6 +165,7 @@ export default class Home extends React.Component {
                                 value={this.state.billCityStatePostal}
                                 onChange={this.handleChange}
                             /><Divider />
+
                             <TextField
                                 floatingLabelText="Phone"
                                 name="billPhone"
@@ -155,7 +175,7 @@ export default class Home extends React.Component {
                                 onChange={this.handleChange}
                             /><br/>
 
-                        <Badge style={{fontSize: 30, align: 'center'}}>Services</Badge><br/>
+                        <Badge style={{fontSize: 30, align: 'center'}} badgeContent="">Services</Badge><br/>
                             <TextField
                                 floatingLabelText="Description"
                                 name="description"
@@ -164,6 +184,7 @@ export default class Home extends React.Component {
                                 value={this.state.description}
                                 onChange={this.handleChange}
                             /><Divider />
+
                             <TextField
                                 floatingLabelText="Amount"
                                 name="amount"
