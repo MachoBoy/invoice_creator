@@ -1,0 +1,43 @@
+.form {
+    border: 1px solid black;
+    width: 75%;
+}
+
+.formHeader {
+    border: 1px solid blue;
+    width: 30%;
+    margin-left:  100px;
+    margin-top: 100px;
+}
+
+.formNumber {
+    border: 1px solid red;
+    width: 10%;
+    float: right;
+    margin-bottom: 500px;
+}
+
+.formRecipient {
+    border: 1px solid blue;
+    width: 30%;
+    margin-left:  100px;
+    margin-top: 15px;
+}
+
+.formServices {
+    border: 1px solid blue;
+    margin-left:  100px;
+    margin-top: 100px;
+}
+
+.services {
+    width: 89%;
+}
+
+.services th, .services td {
+    text-align: right;
+    border-bottom: 0.1em solid black;
+}
+.services th:first-child, .services td:first-child {
+    text-align: left;
+}
