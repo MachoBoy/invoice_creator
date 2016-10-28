@@ -19,8 +19,11 @@ export default class Home extends React.Component {
             billStreet: 'bStreet',
             billCityStatePostal: 'CSP',
             billPhone:'BPho',
-            description: 'desc',
-            amount: 'amt',
+            services: {
+                description: 'desc',
+                tax: '',
+                amount: 'amt',
+            },
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleDate = this.handleDate.bind(this);
@@ -203,17 +206,21 @@ export default class Home extends React.Component {
     }
 }
 
+function calculateServices() {
+    
+}
+
 const styles={
     smallWidth: {
-        width: 140,
-        margin: 10,
-    },
-    mediumWidth: {
         width: 160,
         margin: 10,
     },
+    mediumWidth: {
+        width: 180,
+        margin: 10,
+    },
     fullWidth: {
-        width: 230,
+        width: 250,
         margin: 10,
     },
 }

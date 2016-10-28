@@ -14,7 +14,7 @@ export default class OutputForm extends React.Component {
                     </div>
 
                     <div className={styles.formNumber}>
-                        <div><h2>Invoice</h2></div>
+                        <div><h4>Invoice</h4></div>
                         <div>{this.props.invoiceNumber}</div>
                         <div>{this.props.date}</div>
                     </div>
@@ -35,17 +35,20 @@ export default class OutputForm extends React.Component {
                                 <tr>
                                     <th>Services</th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </tbody>
                             <tbody>
                                 <tr>
                                     <th>Description</th>
+                                    <th>Tax</th>
                                     <th>Amount</th>
                                 </tr>
                             </tbody>
                             <tbody>
                                 <tr>
                                     <td>{this.props.description}</td>
+                                    <td>{this.props.tax}</td>
                                     <td>{this.props.amount}</td>
                                 </tr>
                             </tbody>
