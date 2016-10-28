@@ -41,7 +41,7 @@ export default class OutputForm extends React.Component {
                             <tbody>
                                 <tr>
                                     <th>Description</th>
-                                    <th>Tax</th>
+                                    <th>Tax(%)</th>
                                     <th>Amount</th>
                                 </tr>
                             </tbody>

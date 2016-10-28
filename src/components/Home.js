@@ -1,6 +1,8 @@
 import React from 'react'
 import { AppBar, TextField, Drawer, DatePicker, Divider, Badge } from 'material-ui'
+import update from 'react-addons-update';
 import OutputForm from './OutputForm'
+import Services from './Services'
 
 export default class Home extends React.Component {
     constructor(props){
@@ -8,25 +10,26 @@ export default class Home extends React.Component {
         const date = new Date();
         this.state = {
             selectedKey: -1,
-            open: false,
-            invoiceNumber: 'invoice n',
+            open: true,
+            invoiceNumber: '',
             date: date,
-            companyName:'companyName',
-            street: 'street',
-            cityStatePostal:'cityStatePostal',
-            phone:'phone',
-            billCompanyName:'bCompa',
-            billStreet: 'bStreet',
-            billCityStatePostal: 'CSP',
-            billPhone:'BPho',
-            services: {
-                description: 'desc',
-                tax: '',
-                amount: 'amt',
-            },
+            companyName:'',
+            street: '',
+            cityStatePostal:'',
+            phone:'',
+            billCompanyName:'',
+            billStreet: '',
+            billCityStatePostal: '',
+            billPhone:'',
+            services: [{
+                description: '',
+                tax: '5',
+                amount: '',
+            }],
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleDate = this.handleDate.bind(this);
+        this.handleCreate = this.handleCreate.bind(this);
     }
 
     handleChange(e){
@@ -39,6 +42,12 @@ export default class Home extends React.Component {
         this.setState({
             date: setDate,
         });
+    }
+
+    handleCreate(services) {
+    	this.setState({
+    		services: update(this.state.services, { $push: [services] })
+    	});
     }
 
     toggleDrawer(){
@@ -71,6 +80,7 @@ export default class Home extends React.Component {
                         billCityStatePostal={this.state.billCityStatePostal}
                         billPhone={this.state.billPhone}
                         description={this.state.description}
+                        tax={this.state.services.tax}
                         amount={this.state.amount}
                     />
                 </div>
@@ -177,25 +187,8 @@ export default class Home extends React.Component {
                                 value={this.state.billPhone}
                                 onChange={this.handleChange}
                             /><br/>
-
-                        <Badge style={{fontSize: 30, align: 'center'}} badgeContent="">Services</Badge><br/>
-                            <TextField
-                                floatingLabelText="Description"
-                                name="description"
-                                style={styles.fullWidth}
-                                underlineShow={false}
-                                value={this.state.description}
-                                onChange={this.handleChange}
-                            /><Divider />
-
-                            <TextField
-                                floatingLabelText="Amount"
-                                name="amount"
-                                style={styles.smallWidth}
-                                underlineShow={false}
-                                value={this.state.amount}
-                                onChange={this.handleChange}
-                            /><Divider />
+                        <Services
+                            oncreate={this.handleCreate}/>
                     </div>
                     </Drawer>
                 </div>
@@ -204,10 +197,6 @@ export default class Home extends React.Component {
 
         );
     }
-}
-
-function calculateServices() {
-    
 }
 
 const styles={
