@@ -47,9 +47,9 @@ export default class OutputForm extends React.Component {
                             </tbody>
                             <tbody>
                                 <tr>
-                                    <td>{this.props.description}</td>
-                                    <td>{this.props.tax}</td>
-                                    <td>{this.props.amount}</td>
+                                    <td>{this.props.serviceData.description}</td>
+                                    <td>{this.props.serviceData.tax}</td>
+                                    <td>{this.props.serviceData.amount}</td>
                                 </tr>
                             </tbody>
                         </table>

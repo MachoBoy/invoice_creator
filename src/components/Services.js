@@ -7,10 +7,12 @@ export default class Services extends React.Component {
         super(props);
         this.state={
             description: '',
-            tax: '',
+            tax: 1,
             amount: '',
         }
+        this.handleSlider = this.handleSlider.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleChange(e) {
@@ -20,7 +22,7 @@ export default class Services extends React.Component {
 	}
 
     handleSlider(event, value){
-        this.state({
+        this.setState({
             tax: value
         });
     }
@@ -34,7 +36,7 @@ export default class Services extends React.Component {
         this.props.onCreate(services);
         this.setState({
             description: '',
-            tax: '',
+            tax: 1,
             amount: '',
         });
     }
@@ -58,6 +60,7 @@ export default class Services extends React.Component {
                     step={1}
                     style={{width: 200, marginLeft: 50,}}
                     name="tax"
+                    defaultValue={1}
                     value={this.state.tax}
                     onChange={this.handleSlider}
                 />

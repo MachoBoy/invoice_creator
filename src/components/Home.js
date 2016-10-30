@@ -21,15 +21,23 @@ export default class Home extends React.Component {
             billStreet: '',
             billCityStatePostal: '',
             billPhone:'',
-            services: [{
-                description: '',
-                tax: '5',
-                amount: '',
+            serviceData: [{
+                description: 'descrition',
+                tax: 'tax',
+                amount: '1.00',
             }],
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleDate = this.handleDate.bind(this);
         this.handleCreate = this.handleCreate.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(key) {
+        this.setState({
+            selectedKey: key
+        })
+        console.log(key, 'is selected');
     }
 
     handleChange(e){
@@ -46,9 +54,23 @@ export default class Home extends React.Component {
 
     handleCreate(services) {
     	this.setState({
-    		services: update(this.state.services, { $push: [services] })
+    		serviceData: update(this.state.serviceData, { $push: [services] })
     	});
+        console.log(this.state.serviceData);
     }
+
+    // handleEdit(description, tax, amount) {
+    //     this.State({
+    //         serviceData: update(this.state.serviceData,
+    //         {
+    //             [this.state.selectedKey]: {
+    //                 description: {$set: description},
+    //                 tax: {$set: tax},
+    //                 amount: {$set: amount}
+    //             }
+    //         })
+    //     });
+    // }
 
     toggleDrawer(){
         this.setState({
@@ -57,7 +79,15 @@ export default class Home extends React.Component {
     }
 
     render() {
-
+        // const mapToComponents = (data) => {
+        //     return data.map((serviceData, i) => {
+        //         return(<OutputForm
+        //                 serviceData={serviceData}
+        //                 key={i}
+        //                 onClick={() => this.handleClick(i)}/>)
+        //         }
+        //     )
+        // }
         return(
             <div>
                 <AppBar
@@ -79,9 +109,8 @@ export default class Home extends React.Component {
                         billStreet={this.state.billStreet}
                         billCityStatePostal={this.state.billCityStatePostal}
                         billPhone={this.state.billPhone}
-                        description={this.state.description}
-                        tax={this.state.services.tax}
-                        amount={this.state.amount}
+                        serviceData={this.state.serviceData}
+
                     />
                 </div>
 
@@ -93,106 +122,104 @@ export default class Home extends React.Component {
                         openSecondary={true}
                     >
                     <div>
-                            <TextField
-                                floatingLabelText="Invoice Number"
-                                name="invoiceNumber"
-                                style={styles.mediumWidth}
-                                underlineShow={false}
+                        <TextField
+                            floatingLabelText="Invoice Number"
+                            name="invoiceNumber"
+                            style={styles.mediumWidth}
+                            underlineShow={false}
+                            value={this.state.invoiceNumber}
+                            onChange={this.handleChange}
+                        /><Divider />
 
-                                value={this.state.invoiceNumber}
-                                onChange={this.handleChange}
-                            /><Divider />
+                        <DatePicker
+                            hintText="Date"
+                            name="date"
+                            underlineShow={false}
+                            firstDayOfWeek={0}
+                            autoOk={true}
+                            textFieldStyle={{width:160, margin:10}}
+                            defaultDate={this.state.date}
+                            onChange={this.handleDate}
+                        /><Divider />
 
-                            <DatePicker
-                                hintText="Date"
-                                name="date"
-                                underlineShow={false}
-                                firstDayOfWeek={0}
-                                autoOk={true}
-                                textFieldStyle={{width:160, margin:10}}
-                                defaultDate={this.state.date}
-                                onChange={this.handleDate}
-                            /><Divider />
+                        <TextField
+                            floatingLabelText="Company Name"
+                            name="companyName"
+                            style={styles.fullWidth}
+                            underlineShow={false}
+                            value={this.state.companyName}
+                            onChange={this.handleChange}
+                        /><Divider />
 
-                            <TextField
-                                floatingLabelText="Company Name"
-                                name="companyName"
-                                style={styles.fullWidth}
-                                underlineShow={false}
-                                value={this.state.companyName}
-                                onChange={this.handleChange}
-                            /><Divider />
+                        <TextField
+                            floatingLabelText="Street Address"
+                            name="street"
+                            style={styles.fullWidth}
+                            underlineShow={false}
+                            value={this.state.street}
+                            onChange={this.handleChange}
+                        /><Divider />
 
-                            <TextField
-                                floatingLabelText="Street Address"
-                                name="street"
-                                style={styles.fullWidth}
-                                underlineShow={false}
-                                value={this.state.street}
-                                onChange={this.handleChange}
-                            /><Divider />
+                        <TextField
+                            floatingLabelText="City, State, Postal Code"
+                            name="cityStatePostal"
+                            style={styles.fullWidth}
+                            underlineShow={false}
+                            value={this.state.cityStatePostal}
+                            onChange={this.handleChange}
+                        /><Divider />
 
-                            <TextField
-                                floatingLabelText="City, State, Postal Code"
-                                name="cityStatePostal"
-                                style={styles.fullWidth}
-                                underlineShow={false}
-                                value={this.state.cityStatePostal}
-                                onChange={this.handleChange}
-                            /><Divider />
-
-                            <TextField
-                                floatingLabelText="Phone"
-                                name="phone"
-                                style={styles.smallWidth}
-                                underlineShow={false}
-                                value={this.state.phone}
-                                onChange={this.handleChange}
-                            /><br/>
+                        <TextField
+                            floatingLabelText="Phone"
+                            name="phone"
+                            style={styles.smallWidth}
+                            underlineShow={false}
+                            value={this.state.phone}
+                            onChange={this.handleChange}
+                        /><br/>
 
 
                         <Badge style={{fontSize: 30, texAlign: 'center'}} badgeContent="">Recipient</Badge><br/>
-                            <TextField
-                                floatingLabelText="Comapny Name"
-                                name="billCompanyName"
-                                style={styles.smallWidth}
-                                underlineShow={false}
-                                value={this.state.billCompanyName}
-                                onChange={this.handleChange}
-                            /><Divider />
+                        <TextField
+                            floatingLabelText="Comapny Name"
+                            name="billCompanyName"
+                            style={styles.smallWidth}
+                            underlineShow={false}
+                            value={this.state.billCompanyName}
+                            onChange={this.handleChange}
+                        /><Divider />
 
-                            <TextField
-                                floatingLabelText="Stree Address"
-                                name="billStreet"
-                                style={styles.mediumWidth}
-                                underlineShow={false}
-                                value={this.state.billStreet}
-                                onChange={this.handleChange}
-                            /><Divider />
+                        <TextField
+                            floatingLabelText="Stree Address"
+                            name="billStreet"
+                            style={styles.mediumWidth}
+                            underlineShow={false}
+                            value={this.state.billStreet}
+                            onChange={this.handleChange}
+                        /><Divider />
 
-                            <TextField
-                                floatingLabelText="City, State, Zip"
-                                name="billCityStatePostal"
-                                style={styles.fullWidth}
-                                underlineShow={false}
-                                value={this.state.billCityStatePostal}
-                                onChange={this.handleChange}
-                            /><Divider />
+                        <TextField
+                            floatingLabelText="City, State, Zip"
+                            name="billCityStatePostal"
+                            style={styles.fullWidth}
+                            underlineShow={false}
+                            value={this.state.billCityStatePostal}
+                            onChange={this.handleChange}
+                        /><Divider />
 
-                            <TextField
-                                floatingLabelText="Phone"
-                                name="billPhone"
-                                style={styles.smallWidth}
-                                underlineShow={false}
-                                value={this.state.billPhone}
-                                onChange={this.handleChange}
-                            /><br/>
+                        <TextField
+                            floatingLabelText="Phone"
+                            name="billPhone"
+                            style={styles.smallWidth}
+                            underlineShow={false}
+                            value={this.state.billPhone}
+                            onChange={this.handleChange}
+                        /><br/>
                         <Services
-                            oncreate={this.handleCreate}/>
+                            onCreate={this.handleCreate}/>
                     </div>
                     </Drawer>
                 </div>
-
             </div>
 
         );
