@@ -6,6 +6,7 @@ export default class Services extends React.Component {
     constructor(props){
         super(props);
         this.state={
+            isEdit: false,
             description: '',
             tax: 1,
             amount: '',
@@ -13,6 +14,9 @@ export default class Services extends React.Component {
         this.handleSlider = this.handleSlider.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+
     }
 
     handleChange(e) {
@@ -39,6 +43,32 @@ export default class Services extends React.Component {
             tax: 1,
             amount: '',
         });
+        this.descriptionInput.focus();
+    }
+
+    handleKeyPress(e) {
+		if(e.charCode==13) {
+			this.handleClick();
+		}
+	}
+
+    handleToggle() {
+        if(!this.state.Edit) {
+            this.setState({
+                description: this.props.serviceData.description,
+                tax: this.props.serviceData.tax,
+                amount: this.props.serviceData.amount,
+            });
+        } else {
+            this.handleEdit();
+        }
+        this.setState({
+            isEdit: !this.state.isEdit
+        });
+    }
+
+    handleEdit() {
+        this.props.onEdit(this.state.description, this.state.tax, this.state.amount);
     }
 
     render() {
@@ -52,6 +82,8 @@ export default class Services extends React.Component {
                     underlineShow={false}
                     value={this.state.description}
                     onChange={this.handleChange}
+                    onClick={this.props.onClick}
+                    ref={(ref) => {this.descriptionInput = ref}}
                 /><Divider />
             Tax
                 <Slider
@@ -63,6 +95,7 @@ export default class Services extends React.Component {
                     defaultValue={1}
                     value={this.state.tax}
                     onChange={this.handleSlider}
+
                 />
 
                 <Divider/>
@@ -73,6 +106,7 @@ export default class Services extends React.Component {
                     underlineShow={false}
                     value={this.state.amount}
                     onChange={this.handleChange}
+                    onKeyPress={this.handleKeyPress}
                 />
                 <FloatingActionButton
                     mini={true}
@@ -105,4 +139,10 @@ const styles={
     addButton: {
         marginLeft: 110,
     }
+}
+
+Services.defaultProps ={
+    description: '',
+    tax: 1,
+    amount: '',
 }
