@@ -44,3 +44,25 @@
 .services th:first-child, .services td:first-child {
     text-align: left;
 }
+
+.formServiceList {
+    border: 1px solid blue;
+    margin-left:100px;
+    width: 60%;
+}
+
+.serviceList{
+    width: 110%;
+    table-layout: fixed;
+}
+
+.serviceList td {
+    text-align: right;
+    width: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.serviceList td:first-child {
+    text-align: left;
+}

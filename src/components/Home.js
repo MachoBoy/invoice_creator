@@ -3,6 +3,7 @@ import { AppBar, TextField, Drawer, DatePicker, Divider, Badge } from 'material-
 import update from 'react-addons-update';
 import OutputForm from './OutputForm'
 import Services from './Services'
+import ServiceForm from './ServiceForm'
 
 export default class Home extends React.Component {
     constructor(props){
@@ -10,7 +11,7 @@ export default class Home extends React.Component {
         const date = new Date();
         this.state = {
             selectedKey: -1,
-            open: true,
+            open: false,
             invoiceNumber: '',
             date: date,
             companyName:'',
@@ -79,15 +80,15 @@ export default class Home extends React.Component {
     }
 
     render() {
-        // const mapToComponents = (data) => {
-        //     return data.map((serviceData, i) => {
-        //         return(<OutputForm
-        //                 serviceData={serviceData}
-        //                 key={i}
-        //                 onClick={() => this.handleClick(i)}/>)
-        //         }
-        //     )
-        // }
+        const mapToComponents = (data) => {
+            return data.map((serviceData, i) => {
+                return(<ServiceForm
+                        serviceData={serviceData}
+                        key={i}
+                        onClick={() => this.handleClick(i)}/>);
+                }
+            )
+        }
         return(
             <div>
                 <AppBar
@@ -110,8 +111,8 @@ export default class Home extends React.Component {
                         billCityStatePostal={this.state.billCityStatePostal}
                         billPhone={this.state.billPhone}
                         serviceData={this.state.serviceData}
-
                     />
+                    {mapToComponents(this.state.serviceData)}
                 </div>
 
                 <div>
