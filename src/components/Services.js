@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField, Badge, Divider, FloatingActionButton, Slider } from 'material-ui'
+import { TextField, Badge, Divider, FloatingActionButton, RaisedButton, Slider } from 'material-ui'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 
 export default class Services extends React.Component {
@@ -53,28 +53,29 @@ export default class Services extends React.Component {
 	}
 
     handleToggle() {
-        if(!this.state.Edit) {
+        if(!this.state.isEdit) {
             this.setState({
                 description: this.props.serviceData.description,
                 tax: this.props.serviceData.tax,
                 amount: this.props.serviceData.amount,
             });
+            console.log('handleToggle');
         } else {
             this.handleEdit();
         }
         this.setState({
-            isEdit: !this.state.isEdit
+            isEdit: !this.state.isEdit,
         });
     }
 
     handleEdit() {
         this.props.onEdit(this.state.description, this.state.tax, this.state.amount);
+        console.log('onEdit');
     }
 
     render() {
-        return(
+        const textView = (
             <div>
-            <Badge style={{fontSize: 30, align: 'center'}} badgeContent="">Services</Badge><br/>
                 <TextField
                     floatingLabelText="Description"
                     name="description"
@@ -95,10 +96,7 @@ export default class Services extends React.Component {
                     defaultValue={1}
                     value={this.state.tax}
                     onChange={this.handleSlider}
-
-                />
-
-                <Divider/>
+                /><Divider/>
                 <TextField
                     floatingLabelText="Amount"
                     name="amount"
@@ -116,9 +114,56 @@ export default class Services extends React.Component {
                 >
                     <ContentAdd />
                 </FloatingActionButton>
-
             </div>
+        );
 
+        const edit = (
+            <div>
+                <TextField
+                    floatingLabelText="Description"
+                    name="description"
+                    style={styles.fullWidth}
+                    underlineShow={false}
+                    value={this.state.description}
+                    onChange={this.handleChange}
+                    onClick={this.props.onClick}
+                    ref={(ref) => {this.descriptionInput = ref}}
+                /><Divider />
+            Tax
+                <Slider
+                    min={0}
+                    max={15}
+                    step={1}
+                    style={{width: 200, marginLeft: 50,}}
+                    name="tax"
+                    defaultValue={1}
+                    value={this.state.tax}
+                    onChange={this.handleSlider}
+                /><Divider/>
+                <TextField
+                    floatingLabelText="Amount"
+                    name="amount"
+                    style={styles.smallWidth}
+                    underlineShow={false}
+                    value={this.state.amount}
+                    onChange={this.handleChange}
+                    onKeyPress={this.handleKeyPress}
+                />
+                <RaisedButton
+                    label="Edit"
+                    primary={true}
+                    style={styles.addButton}
+                    onClick={this.handleToggle}
+                >
+                </RaisedButton>
+            </div>
+        );
+
+        return(
+            <div>
+                <Badge style={{fontSize: 30, align: 'center'}} badgeContent="">Services</Badge><br/>
+                {this.props.isSelected ? edit : textView}
+            </div>
         );
     }
 }

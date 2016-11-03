@@ -32,7 +32,7 @@ export default class Home extends React.Component {
             serviceData: [{
                 description: 'descrition',
                 tax: 'tax',
-                amount: '1.00',
+                amount: 1.00,
             }],
         };
         this.handleChange = this.handleChange.bind(this);
@@ -44,7 +44,7 @@ export default class Home extends React.Component {
 
     handleClick(key) {
         this.setState({
-            selectedKey: key
+            selectedKey: key,
         })
         console.log(key, 'is selected');
     }
@@ -69,7 +69,7 @@ export default class Home extends React.Component {
     }
 
     handleEdit(description, tax, amount) {
-        this.State({
+        this.setState({
             serviceData: update(this.state.serviceData,
             {
                 [this.state.selectedKey]: {
@@ -79,6 +79,7 @@ export default class Home extends React.Component {
                 }
             })
         });
+        console.log("handleEdit");
     }
 
     toggleDrawer(){
@@ -228,7 +229,7 @@ export default class Home extends React.Component {
                         /><br/>
                         <Services
                             isSelected={this.state.selectedKey != -1}
-                            contact={this.state.serviceData[this.state.selectedKey]}
+                            serviceData={this.state.serviceData[this.state.selectedKey]}
                             onCreate={this.handleCreate}
                             onEdit={this.handleEdit}
                         />
