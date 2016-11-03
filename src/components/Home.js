@@ -1,5 +1,12 @@
 import React from 'react'
-import { AppBar, TextField, Drawer, DatePicker, Divider, Badge } from 'material-ui'
+import {
+    AppBar,
+    TextField,
+    Drawer,
+    DatePicker,
+    Divider,
+    Badge,
+    Paper } from 'material-ui'
 import update from 'react-addons-update';
 import OutputForm from './OutputForm'
 import Services from './Services'
@@ -11,7 +18,7 @@ export default class Home extends React.Component {
         const date = new Date();
         this.state = {
             selectedKey: -1,
-            open: false,
+            open: true,
             invoiceNumber: '',
             date: date,
             companyName:'',
@@ -100,6 +107,7 @@ export default class Home extends React.Component {
                 />
 
                 <div>
+                    <Paper zDepth={2} style={{width: '70%'}}>
                     <OutputForm
                         invoiceNumber={this.state.invoiceNumber}
                         date={this.state.date.toString().substring(4, 15)}
@@ -114,6 +122,7 @@ export default class Home extends React.Component {
                         serviceData={this.state.serviceData}
                     />
                     {mapToComponents(this.state.serviceData)}
+                    </Paper>
                 </div>
 
                 <div>

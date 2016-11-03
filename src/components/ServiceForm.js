@@ -5,7 +5,7 @@ export default class SerivceForm extends React.Component {
     render() {
         return(
             <div className={styles.formServiceList}>
-                <table className={styles.serviceList}>
+                <table className={styles.serviceList} onClick={this.props.onClick}>
                     <tbody>
                         <tr>
                             <td>{this.props.serviceData.description}</td>

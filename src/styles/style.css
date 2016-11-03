@@ -1,31 +1,31 @@
-.form {
-    width: 75%;
-}
 
+/*Sender*/
 .formHeader {
     width: 30%;
-    margin-left:  100px;
+    margin-left:  80px;
     margin-top: 30px;
     position: relative;
     height: 160px;
 }
 
+/*form invoice / date */
 .formNumber {
     width: 10%;
     float: right;
     position: relative;
 }
 
+/*Recipient*/
 .formRecipient {
     width: 30%;
-    margin-left:  100px;
+    margin-left:  80px;
     margin-top: 15px;
     height: 130px;
 }
 
-.formServices {
 
-    margin-left:  100px;
+.formServices {
+    margin-left:  80px;
     margin-top: 100px;
 }
 
@@ -42,13 +42,13 @@
 }
 
 .formServiceList {
-    
+
     margin-left:100px;
     width: 60%;
 }
 
 .serviceList{
-    width: 110%;
+    width: 145%;
     table-layout: fixed;
 }
 
