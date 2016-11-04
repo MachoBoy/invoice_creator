@@ -6,7 +6,6 @@ export default class Services extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            isEdit: false,
             description: '',
             tax: 1,
             amount: '',
@@ -14,9 +13,6 @@ export default class Services extends React.Component {
         this.handleSlider = this.handleSlider.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        this.handleToggle = this.handleToggle.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
-
     }
 
     handleChange(e) {
@@ -74,95 +70,47 @@ export default class Services extends React.Component {
     }
 
     render() {
-        const textView = (
-            <div>
-                <TextField
-                    floatingLabelText="Description"
-                    name="description"
-                    style={styles.fullWidth}
-                    underlineShow={false}
-                    value={this.state.description}
-                    onChange={this.handleChange}
-                    onClick={this.props.onClick}
-                    ref={(ref) => {this.descriptionInput = ref}}
-                /><Divider />
-            Tax
-                <Slider
-                    min={0}
-                    max={15}
-                    step={1}
-                    style={{width: 200, marginLeft: 50,}}
-                    name="tax"
-                    defaultValue={1}
-                    value={this.state.tax}
-                    onChange={this.handleSlider}
-                /><Divider/>
-                <TextField
-                    floatingLabelText="Amount"
-                    name="amount"
-                    style={styles.smallWidth}
-                    underlineShow={false}
-                    value={this.state.amount}
-                    onChange={this.handleChange}
-                    onKeyPress={this.handleKeyPress}
-                />
-                <FloatingActionButton
-                    mini={true}
-                    secondary={true}
-                    style={styles.addButton}
-                    onClick={this.handleClick}
-                >
-                    <ContentAdd />
-                </FloatingActionButton>
-            </div>
-        );
-
-        const edit = (
-            <div>
-                <TextField
-                    floatingLabelText="Description"
-                    name="description"
-                    style={styles.fullWidth}
-                    underlineShow={false}
-                    value={this.state.description}
-                    onChange={this.handleChange}
-                    onClick={this.props.onClick}
-                    ref={(ref) => {this.descriptionInput = ref}}
-                /><Divider />
-            Tax
-                <Slider
-                    min={0}
-                    max={15}
-                    step={1}
-                    style={{width: 200, marginLeft: 50,}}
-                    name="tax"
-                    defaultValue={1}
-                    value={this.state.tax}
-                    onChange={this.handleSlider}
-                /><Divider/>
-                <TextField
-                    floatingLabelText="Amount"
-                    name="amount"
-                    style={styles.smallWidth}
-                    underlineShow={false}
-                    value={this.state.amount}
-                    onChange={this.handleChange}
-                    onKeyPress={this.handleKeyPress}
-                />
-                <RaisedButton
-                    label="Edit"
-                    primary={true}
-                    style={styles.addButton}
-                    onClick={this.handleToggle}
-                >
-                </RaisedButton>
-            </div>
-        );
-
         return(
             <div>
                 <Badge style={{fontSize: 30, align: 'center'}} badgeContent="">Services</Badge><br/>
-                {this.props.isSelected ? edit : textView}
+                    <div>
+                        <TextField
+                            floatingLabelText="Description"
+                            name="description"
+                            style={styles.fullWidth}
+                            underlineShow={false}
+                            value={this.state.description}
+                            onChange={this.handleChange}
+                        /><Divider />
+                    Tax
+                        <Slider
+                            min={0}
+                            max={15}
+                            step={1}
+                            style={{width: 200, marginLeft: 50,}}
+                            name="tax"
+                            defaultValue={1}
+                            value={this.state.tax}
+                            onChange={this.handleSlider}
+                        /><Divider/>
+
+                        <TextField
+                            floatingLabelText="Amount"
+                            name="amount"
+                            style={styles.smallWidth}
+                            underlineShow={false}
+                            value={this.state.amount}
+                            onChange={this.handleChange}
+                        />
+                        <FloatingActionButton
+                            mini={true}
+                            secondary={true}
+                            style={styles.addButton}
+                            onClick={this.handleClick}
+                        >
+                            <ContentAdd />
+                        </FloatingActionButton>
+                    </div>
             </div>
         );
     }
@@ -184,10 +132,4 @@ const styles={
     addButton: {
         marginLeft: 110,
     }
-}
-
-Services.defaultProps ={
-    description: '',
-    tax: 1,
-    amount: '',
 }
