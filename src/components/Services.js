@@ -81,6 +81,7 @@ export default class Services extends React.Component {
                             underlineShow={false}
                             value={this.state.description}
                             onChange={this.handleChange}
+                            ref={(ref) => {this.descriptionInput = ref}}
                         /><Divider />
                     Tax
                         <Slider

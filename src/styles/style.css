@@ -1,7 +1,7 @@
 
 /*Sender*/
 .formHeader {
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     width: 30%;
     margin-left:  80px;
     margin-top: 30px;
@@ -11,7 +11,7 @@
 
 /*form invoice / date */
 .formNumber {
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     width: 10%;
     float: right;
     position: relative;
@@ -19,7 +19,7 @@
 
 /*Recipient*/
 .formRecipient {
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     width: 30%;
     margin-left:  80px;
     margin-top: 15px;
@@ -29,7 +29,7 @@
 /*service*/
 .formServices {
     margin-left:  80px;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     margin-left:  100px;
     margin-top: 100px;
 }
@@ -48,7 +48,7 @@
 
 /*service list*/
 .formServiceList {
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     margin-left:100px;
     width: 60%;
 }
