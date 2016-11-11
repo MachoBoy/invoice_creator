@@ -1,15 +1,18 @@
 import React from 'react'
-import { TextField, Badge, Divider, FloatingActionButton, RaisedButton, Slider } from 'material-ui'
+import {
+    TextField,
+    Badge,
+    Divider,
+    FloatingActionButton,
+    RaisedButton,
+    Slider 
+} from 'material-ui'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 
 export default class Services extends React.Component {
     constructor(props){
         super(props);
-        this.state={
-            description: '',
-            tax: 1,
-            amount: '',
-        }
+       
         this.handleSlider = this.handleSlider.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -29,9 +32,9 @@ export default class Services extends React.Component {
 
     handleClick() {
         const services = {
-            description: this.state.description,
-            tax: this.state.tax,
-            amount: this.state.amount,
+            description: this.props.description,
+            tax: this.props.tax,
+            amount: this.props.amount,
         };
         this.props.onCreate(services);
         this.setState({
@@ -48,26 +51,12 @@ export default class Services extends React.Component {
 		}
 	}
 
-    handleToggle() {
-        if(!this.state.isEdit) {
-            this.setState({
-                description: this.props.serviceData.description,
-                tax: this.props.serviceData.tax,
-                amount: this.props.serviceData.amount,
-            });
-            console.log('handleToggle');
-        } else {
-            this.handleEdit();
-        }
-        this.setState({
-            isEdit: !this.state.isEdit,
-        });
-    }
-
-    handleEdit() {
-        this.props.onEdit(this.state.description, this.state.tax, this.state.amount);
-        console.log('onEdit');
-    }
+    // handleRemove(){
+    //     this.setState({
+    //         serviceData: update(this.state.contactService,
+    //         { $splice: })
+    //     })
+    // }
 
     render() {
         return(
@@ -79,8 +68,9 @@ export default class Services extends React.Component {
                             name="description"
                             style={styles.fullWidth}
                             underlineShow={false}
-                            value={this.state.description}
+                            value={this.props.description}
                             onChange={this.handleChange}
+                            ref={(ref) => {this.descriptionInput = ref}}
                         /><Divider />
                     Tax
                         <Slider
@@ -90,7 +80,7 @@ export default class Services extends React.Component {
                             style={{width: 200, marginLeft: 50,}}
                             name="tax"
                             defaultValue={1}
-                            value={this.state.tax}
+                            value={this.props.tax}
                             onChange={this.handleSlider}
                         /><Divider/>
 
@@ -99,14 +89,14 @@ export default class Services extends React.Component {
                             name="amount"
                             style={styles.smallWidth}
                             underlineShow={false}
-                            value={this.state.amount}
+                            value={this.props.amount}
                             onChange={this.handleChange}
                         />
                         <FloatingActionButton
                             mini={true}
                             secondary={true}
                             style={styles.addButton}
-                            onClick={this.handleClick}
+                            onClick={this.props.onCreate}
                         >
                             <ContentAdd />
                         </FloatingActionButton>

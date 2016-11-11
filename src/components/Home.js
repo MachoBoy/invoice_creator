@@ -12,7 +12,11 @@ import OutputForm from './OutputForm'
 import Services from './Services'
 import ServiceForm from './ServiceForm'
 
-export default class Home extends React.Component {
+import { connect } from 'react-redux'
+import * as action from '../actions'
+
+
+class Home extends React.Component {
     constructor(props){
         super(props);
         const date = new Date();
@@ -29,17 +33,10 @@ export default class Home extends React.Component {
             billStreet: '',
             billCityStatePostal: '',
             billPhone:'',
-            serviceData: [{
-                description: 'descrition',
-                tax: 'tax',
-                amount: 1.00,
-            }],
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleDate = this.handleDate.bind(this);
-        this.handleCreate = this.handleCreate.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        this.handleEdit = this.handleEdit.bind(this);
     }
 
     handleClick(key) {
@@ -60,27 +57,27 @@ export default class Home extends React.Component {
             date: setDate,
         });
     }
+    //
+    // handleCreate(services) {
+    // 	this.setState({
+    // 		serviceData: update(this.state.serviceData, { $push: [services] })
+    // 	});
+    //     console.log(this.state.serviceData);
+    // }
 
-    handleCreate(services) {
-    	this.setState({
-    		serviceData: update(this.state.serviceData, { $push: [services] })
-    	});
-        console.log(this.state.serviceData);
-    }
-
-    handleEdit(description, tax, amount) {
-        this.setState({
-            serviceData: update(this.state.serviceData,
-            {
-                [this.state.selectedKey]: {
-                    description: {$set: description},
-                    tax: {$set: tax},
-                    amount: {$set: amount}
-                }
-            })
-        });
-        console.log("handleEdit");
-    }
+    // handleEdit(description, tax, amount) {
+    //     this.setState({
+    //         serviceData: update(this.state.serviceData,
+    //         {
+    //             [this.state.selectedKey]: {
+    //                 description: {$set: description},
+    //                 tax: {$set: tax},
+    //                 amount: {$set: amount}
+    //             }
+    //         })
+    //     });
+    //     console.log("handleEdit");
+    // }
 
     toggleDrawer(){
         this.setState({
@@ -89,15 +86,6 @@ export default class Home extends React.Component {
     }
 
     render() {
-        const mapToComponents = (data) => {
-            return data.map((serviceData, i) => {
-                return(<ServiceForm
-                        serviceData={serviceData}
-                        key={i}
-                        onClick={() => this.handleClick(i)}/>);
-                }
-            )
-        }
         return(
             <div>
                 <AppBar
@@ -122,7 +110,7 @@ export default class Home extends React.Component {
                         billPhone={this.state.billPhone}
                         serviceData={this.state.serviceData}
                     />
-                    {mapToComponents(this.state.serviceData)}
+                   
                     </Paper>
                 </div>
 
@@ -228,10 +216,11 @@ export default class Home extends React.Component {
                             onChange={this.handleChange}
                         /><br/>
                         <Services
-                            isSelected={this.state.selectedKey != -1}
-                            serviceData={this.state.serviceData[this.state.selectedKey]}
-                            onCreate={this.handleCreate}
-                            onEdit={this.handleEdit}
+                            id={this.props.id}
+                            description={this.props.description}
+                            tax={this.props.tax}
+                            amount={this.props.amount}
+                            onCreate={this.props.handleCreate}
                         />
                     </div>
                     </Drawer>
@@ -256,3 +245,22 @@ const styles={
         margin: 10,
     },
 }
+
+const mapStateToProps = (state) => {
+    return {
+        serviceData: state.services.serviceData,
+        id: state.services.id,
+        descrition: state.services.descrition,
+        tax: state.services.tax,
+        amount: state.services.amount
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleCreate: (services) => { dispatch(action.create(services)) },
+        handleEdit: () => { dispatch(action.edit(id)) },
+        handleRemove: () => { dispatch(action.remove(id)) }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -13,21 +13,9 @@ export default class SerivceForm extends React.Component {
                             <td>{this.props.serviceData.description}</td>
                             <td>{this.props.serviceData.tax}</td>
                             <td>{this.props.serviceData.amount}</td>
-                            <td>
-                                <div><IconMenu
-                                      iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-                                      anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-                                      targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                                    >
-                                      <MenuItem primaryText="Edit" onItemTouchTap=""/>
-                                      <MenuItem primaryText="Delete" />
-                                </IconMenu></div>
-                            </td>
                         </tr>
                     </tbody>
                 </table>
-
-
             </div>
 
         );
